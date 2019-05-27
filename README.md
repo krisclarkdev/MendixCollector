@@ -50,14 +50,6 @@ yourself.
 npm run build
 ```
 
-### Running
-
-To run the binary open a terminal and execute
-
-```
-node ./MendixCollector.js  --interval=30 --hostname=http://CHANGEME --port=CHANGEME --password=CHANGEME --wfproxy=CHANGEME --wfport=CHANGEME
-```
-
 This will produce 
 
 ```
@@ -67,6 +59,14 @@ MendixCollector-win.exe
 ```
 
 If you are deploying to linux or mac make sure to chmod +x the binary.
+
+### Running
+
+To run the binary open a terminal and execute
+
+```
+node ./MendixCollector.js  --interval=30 --hostname=http://CHANGEME --port=CHANGEME --password=CHANGEME --wfproxy=CHANGEME --wfport=CHANGEME
+```
 
 ## Authors
 
