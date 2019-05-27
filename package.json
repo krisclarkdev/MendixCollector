@@ -1,0 +1,20 @@
+{
+  "name": "mendixcollector",
+  "version": "1.0.0",
+  "description": "Package that pull metrics from mendix applications and proxies them to Wavefront",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./MendixCollector.js  --interval=30 --hostname=http://CHANGEME --port=CHANGEME --password=CHANGEME --wfproxy=CHANGEME --wfport=CHANGEME",
+    "start": "node ./MendixCollector.js",
+    "build": "npx pkg MendixCollector.js"
+  },
+  "author": "Kristopher Clark",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "flat": "^4.1.0",
+    "signtool": "^1.0.0",
+    "wavefrontmetrics": "^1.1.0",
+    "yargs": "^13.2.2"
+  }
+}
