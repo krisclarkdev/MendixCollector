@@ -14,7 +14,7 @@ let password = new Buffer(args.password).toString('base64');
 let wfproxy  = args.wfproxy;
 let wfport   = args.wfport;
 
-const proxyReporter = new metrics.WavefrontProxyReporter(registry, prefix, wfproxy, wfport, {'source': "mendix"});
+const proxyReporter = new metrics.WavefrontProxyReporter(registry, prefix, wfproxy, wfport, {'source': "mendixTestCollector2"});
 
 proxyReporter.start(5000);
 
@@ -25,7 +25,7 @@ let headers = {
 
 function addMetric(metric, value, tags) {
     try {
-        registry.addTaggedMetric(metric, new metrics.Gauge(value), tags);
+        registry.addTaggedMetric('mendixTestCollector.' + metric, new metrics.Gauge(value), tags);
     }catch(err){
         console.log(err);
     }
