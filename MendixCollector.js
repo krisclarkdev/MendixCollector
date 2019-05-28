@@ -14,7 +14,7 @@ let password = new Buffer(args.password).toString('base64');
 let wfproxy  = args.wfproxy;
 let wfport   = args.wfport;
 
-const proxyReporter = new metrics.WavefrontProxyReporter(registry, prefix, wfproxy, wfport, {'source': "mendix"});
+const proxyReporter = new metrics.WavefrontProxyReporter(registry, prefix, wfproxy, wfport, {'source': "mendix3"});
 
 proxyReporter.start(5000);
 
@@ -52,13 +52,38 @@ let flattenObject = function(ob) {
 
 let stageMetrics = function(res) {
     try {
-        let flatObject = flattenObject(res.data.feedback);
+        if(res.data.feedback.requests !== undefined) {
+            for(let i=0; i<res.data.feedback.requests.length; i++) {
+                let name  = '';
+                let value = res.data.feedback.requests[i].value;
 
-        for(let key in flatObject) {
-            if(!isNaN(flatObject[key])) {
-                addMetric(key, flatObject[key]);
+                if(res.data.feedback.requests[i].name == '') {
+                    name = 'root';
+                }else{
+                    name = res.data.feedback.requests[i].name;
+                }
+
+                name = name.replace(/\//g,'.');
+                name = 'requests.' + name;
+
+                if(name[name.length -1] == '.') {
+                    name = name.substring(0, name.length - 1);
+                }
+
+                addMetric(name, value);
+            }
+        }else{
+            let flatObject = flattenObject(res.data.feedback);
+
+            for(let key in flatObject) {
+                if(!isNaN(flatObject[key])) {
+                    addMetric(key, flatObject[key]);
+                }else{
+
+                }
             }
         }
+
     }catch(ex){
         console.log('Error flattening response.  Will ignore and continue to the next object.')
     }
