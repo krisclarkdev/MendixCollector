@@ -14,7 +14,7 @@ let password = new Buffer(args.password).toString('base64');
 let wfproxy  = args.wfproxy;
 let wfport   = args.wfport;
 
-const proxyReporter = new metrics.WavefrontProxyReporter(registry, prefix, wfproxy, wfport, {'source': "mendix3"});
+const proxyReporter = new metrics.WavefrontProxyReporter(registry, prefix, wfproxy, wfport, {'source': "mendix"});
 
 proxyReporter.start(5000);
 
